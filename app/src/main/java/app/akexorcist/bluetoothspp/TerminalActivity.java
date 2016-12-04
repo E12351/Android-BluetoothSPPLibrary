@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -85,25 +84,6 @@ public class TerminalActivity extends Activity {
                 getMenuInflater().inflate(R.menu.menu_disconnection, menu);
             }
         });
-
-        //------------------------------------------------------------------------------------------
-        final Button up = (Button) findViewById(R.id.up);
-        up.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    textView.setText("Button Pressed");
-                }
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    textView.setText(""); //finger was lifted
-                }
-                return true;
-            }
-        });
-
-
-        //------------------------------------------------------------------------------------------
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
