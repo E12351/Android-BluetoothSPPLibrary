@@ -20,9 +20,11 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,7 +38,7 @@ import app.akexorcist.bluetotohspp.library.BluetoothSPP.BluetoothConnectionListe
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.OnDataReceivedListener;
 
 public class TerminalActivity extends Activity {
-    BluetoothSPP bt;
+    public static BluetoothSPP bt;
 
     TextView textStatus, textRead;
     EditText etMessage;
@@ -83,6 +85,41 @@ public class TerminalActivity extends Activity {
                 menu.clear();
                 getMenuInflater().inflate(R.menu.menu_disconnection, menu);
             }
+        });
+
+        //------------------------------------------------------------------------------------------
+        Button up = (Button)findViewById(R.id.up);
+
+        up.setOnTouchListener(new View.OnTouchListener() {
+
+//            private Handler mHandler;
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+//                        if (mHandler != null) return true;
+//                        mHandler = new Handler();
+//                        mHandler.postDelayed(mAction, 500);
+
+                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+//                        if (mHandler == null) return true;
+//                        mHandler.removeCallbacks(mAction);
+//                        mHandler = null;
+                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
+
+//            Runnable mAction = new Runnable() {
+//                @Override public void run() {
+//                    System.out.println("Performing action...");
+//                    mHandler.postDelayed(this, 500);
+//                }
+//            };
+
         });
     }
 
