@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-//iSAFE
 
 public class Main extends Activity implements OnClickListener {
 
