@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +44,8 @@ public class TerminalActivity extends Activity {
     TextView textStatus, textRead;
     EditText etMessage;
 
+
+
     Menu menu;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,10 @@ public class TerminalActivity extends Activity {
         Log.i("Check", "onCreate");
 
         textRead = (TextView)findViewById(R.id.textRead);
+        textRead.setMovementMethod(new ScrollingMovementMethod());
+
         textStatus = (TextView)findViewById(R.id.textStatus);
-        etMessage = (EditText)findViewById(R.id.etMessage);
+//        etMessage = (EditText)findViewById(R.id.etMessage);
 
         bt = new BluetoothSPP(this);
 
@@ -88,38 +93,112 @@ public class TerminalActivity extends Activity {
         });
 
         //------------------------------------------------------------------------------------------
-        Button up = (Button)findViewById(R.id.up);
-
-        up.setOnTouchListener(new View.OnTouchListener() {
-
+        Button right = (Button)findViewById(R.id.right);
+        right.setOnTouchListener(new View.OnTouchListener() {
 //            private Handler mHandler;
-
             @Override public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-//                        if (mHandler != null) return true;
-//                        mHandler = new Handler();
-//                        mHandler.postDelayed(mAction, 500);
-
+                        bt.send("1", true);
                         Log.d("tag","up");
                         break;
                     case MotionEvent.ACTION_UP:
-//                        if (mHandler == null) return true;
-//                        mHandler.removeCallbacks(mAction);
-//                        mHandler = null;
+                        bt.send("0", true);
                         Log.d("tag","stop");
                         break;
                 }
                 return false;
             }
+        });
 
-//            Runnable mAction = new Runnable() {
-//                @Override public void run() {
-//                    System.out.println("Performing action...");
-//                    mHandler.postDelayed(this, 500);
-//                }
-//            };
+        Button left = (Button)findViewById(R.id.Left);
+        left.setOnTouchListener(new View.OnTouchListener() {
+            //            private Handler mHandler;
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        bt.send("2", true);
+//                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        bt.send("0", true);
+//                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
+        });
 
+        Button fwd = (Button)findViewById(R.id.fwd);
+        fwd.setOnTouchListener(new View.OnTouchListener() {
+            //            private Handler mHandler;
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        bt.send("3", true);
+//                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        bt.send("0", true);
+//                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
+        });
+
+        Button bck = (Button)findViewById(R.id.bck);
+        bck.setOnTouchListener(new View.OnTouchListener() {
+            //            private Handler mHandler;
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        bt.send("4", true);
+//                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        bt.send("0", true);
+//                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
+        });
+
+        Button up = (Button)findViewById(R.id.up);
+        up.setOnTouchListener(new View.OnTouchListener() {
+            //            private Handler mHandler;
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        bt.send("5", true);
+//                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        bt.send("0", true);
+//                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
+        });
+
+        Button dwn = (Button)findViewById(R.id.dwn);
+        dwn.setOnTouchListener(new View.OnTouchListener() {
+            //            private Handler mHandler;
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        bt.send("6", true);
+//                        Log.d("tag","up");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        bt.send("0", true);
+//                        Log.d("tag","stop");
+                        break;
+                }
+                return false;
+            }
         });
     }
 
@@ -172,15 +251,15 @@ public class TerminalActivity extends Activity {
     }
 
     public void setup() {
-        Button btnSend = (Button)findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new OnClickListener(){
-            public void onClick(View v){
-                if(etMessage.getText().length() != 0) {
-                    bt.send(etMessage.getText().toString(), true);
-                    etMessage.setText("");
-                }
-            }
-        });
+//        Button btnSend = (Button)findViewById(R.id.btnSend);
+//        btnSend.setOnClickListener(new OnClickListener(){
+//            public void onClick(View v){
+//                if(etMessage.getText().length() != 0) {
+//                    bt.send(etMessage.getText().toString(), true);
+//                    etMessage.setText("");
+//                }
+//            }
+//        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
